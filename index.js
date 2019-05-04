@@ -72,7 +72,7 @@ const run = async () => {
 		.description('Get Word Of Day')
 		.action(async () => {
 			let data = await getWordOfDay();
-			console.log(chalk.green(data));
+			console.log(chalk.green(JSON.stringify(data)));
 		});
 
 	program
@@ -81,7 +81,7 @@ const run = async () => {
 		.description('Get Word Game')
 		.action(async () => {
 			let data = await getWordGame();
-			console.log(chalk.green(data));
+			console.log(chalk.green(JSON.stringify(data)));
 		});
 
 	program.parse(process.argv);
