@@ -42,6 +42,18 @@ const run = async () => {
 		.alias('ex')
 		.description('Get Examples')
 		.action(word => getExamples(word));
+	
+		program
+		.command('getFullDict <word>')
+		.alias('fdict')
+		.description('Get Full Dict')
+		.action(word => getFullDict(word));
+
+		program
+		.command('getWordOfDay <word>')
+		.alias('wod')
+		.description('Get Word Of Day')
+		.action(word => getWordOfDay(word));
 	program.parse(process.argv);
 };
 
