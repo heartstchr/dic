@@ -4,7 +4,7 @@ const clear= require('clear');
 const figlet= require('figlet');
 const program= require('commander');
 
-const { getDefinations, getSynonyms, getAntonyms , getExamples} = require('./lib/index');
+const { getDefinations, getSynonyms, getAntonyms , getExamples, getFullDict, getWordOfDay, getWordGame} = require('./lib/index');
 
 clear();
 
@@ -23,43 +23,64 @@ const run = async () => {
 		.command('getDefinations <word>')
 		.alias('def')
 		.description('Get definations')
-		.action((word) => getDefinations(word));
+		.action(async (word) => {
+			let data = await getDefinations(word);
+			console.log(chalk.green(data));
+		});
 
 	program
 		.command('getSynonyms <word>')
 		.alias('syn')
 		.description('Get synonyms')
-		.action(word => getSynonyms(word));
+		.action(async (word) => {
+			let data = await getSynonyms(word);
+			console.log(chalk.green(data));
+		});
 
 	program
 		.command('getAntonyms <word>')
 		.alias('ant')
 		.description('Get antonyms')
-		.action(word => getAntonyms(word));
+		.action(async (word) => {
+			let data = await getAntonyms(word);
+			console.log(chalk.green(data));
+		});
 
 	program
 		.command('getExamples <word>')
 		.alias('ex')
 		.description('Get Examples')
-		.action(word => getExamples(word));
+		.action(async (word) => {
+			let data = await getExamples(word);
+			console.log(chalk.green(data));
+		});
 	
 	program
 		.command('getFullDict <word>')
 		.alias('fdict')
 		.description('Get Full Dict')
-		.action(word => getFullDict(word));
+		.action(async (word) => {
+			let data = await getFullDict(word);
+			console.log(chalk.green(data));
+		});
 
 	program
-		.command('getWordOfDay <word>')
+		.command('getWordOfDay')
 		.alias('wod')
 		.description('Get Word Of Day')
-		.action(word => getWordOfDay());
+		.action(async () => {
+			let data = await getWordOfDay();
+			console.log(chalk.green(data));
+		});
 
 	program
-		.command('getWordGame <word>')
+		.command('getWordGame')
 		.alias('play')
 		.description('Get Word Game')
-		.action(word => getWordGame());
+		.action(async () => {
+			let data = await getWordGame();
+			console.log(chalk.green(data));
+		});
 
 	program.parse(process.argv);
 };

@@ -34,7 +34,7 @@
     "clear": "^0.1.0",
     "commander": "^2.20.0",
     "figlet": "^1.2.1",
-    "superagent": "^5.0.5"
+    "request": "^2.88.0"
   },
   "devDependencies": {
     "eslint": "^5.16.0",
