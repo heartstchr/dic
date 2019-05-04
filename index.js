@@ -23,7 +23,7 @@ const run = async () => {
 		.command('getDefinations <word>')
 		.alias('def')
 		.description('Get definations')
-		.action(word => getDefinations(word));
+		.action((word) => getDefinations(word));
 
 	program
 		.command('getSynonyms <word>')
@@ -42,10 +42,6 @@ const run = async () => {
 		.alias('ex')
 		.description('Get Examples')
 		.action(word => getExamples(word));
-
-
-
-		
 	program.parse(process.argv);
 };
 
