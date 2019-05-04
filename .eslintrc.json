@@ -1,0 +1,52 @@
+{
+    "env": {
+        "browser": true,
+        "es6": true,
+        "mocha": true,
+        "node":true
+    },
+    "extends": [
+        "eslint:recommended"
+    ],
+    "parserOptions": {
+        "ecmaVersion": 8,
+        "ecmaFeatures": {
+            "modules":true,
+            "arrowFunctions":true,
+            "classes":true
+        },
+        "sourceType": "module"
+    },
+    "rules": {
+        "indent": [
+            "error",
+            "tab"
+        ],
+        "linebreak-style": [
+            "error",
+            "unix"
+        ],
+        "quotes": [
+            "error",
+            "single"
+        ],
+        "semi": [
+            "error",
+            "always"
+        ],
+        "prefer-arrow-callback": [
+            "error",
+            { 
+                "allowNamedFunctions": true 
+            } 
+        ],
+        "one-var": [
+            "error",
+            "never"
+        ],
+        "no-var": "error",
+        "no-debugger": "error",
+        "no-empty": 2,
+        "no-multiple-empty-lines":["error", { "max": 1, "maxEOF": 1 }]
+    }
+}
