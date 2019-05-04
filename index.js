@@ -54,14 +54,16 @@ const run = async () => {
 			let data = await getExamples(word);
 			console.log(chalk.green(data));
 		});
-	
+		// getDefinations(word)
+		// getSynonyms(word)
+		// getAntonyms(word)
 	program
 		.command('getFullDict <word>')
 		.alias('fdict')
 		.description('Get Full Dict')
 		.action(async (word) => {
 			let data = await getFullDict(word);
-			console.log(chalk.green(data));
+			console.log(chalk.green(JSON.stringify(data)));
 		});
 
 	program
