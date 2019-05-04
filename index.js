@@ -43,6 +43,9 @@ const run = async () => {
 		.description('Get Examples')
 		.action(word => getExamples(word));
 
+
+
+		
 	program.parse(process.argv);
 };
 
