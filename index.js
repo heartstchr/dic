@@ -54,9 +54,6 @@ const run = async () => {
 			let data = await getExamples(word);
 			console.log(chalk.green(data));
 		});
-		// getDefinations(word)
-		// getSynonyms(word)
-		// getAntonyms(word)
 	program
 		.command('getFullDict <word>')
 		.alias('fdict')
