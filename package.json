@@ -1,0 +1,27 @@
+{
+  "name": "dic",
+  "version": "1.0.0",
+  "description": "command line dictionary",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/heartstchr/dic.git"
+  },
+  "bin": {
+    "dic": "./index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/heartstchr/dic/issues"
+  },
+  "homepage": "https://github.com/heartstchr/dic#readme",
+  "dependencies": {
+    "chalk": "^2.4.2",
+    "clear": "^0.1.0",
+    "figlet": "^1.2.1"
+  }
+}
