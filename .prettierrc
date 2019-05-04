@@ -1,0 +1,15 @@
+{
+    "printWidth": 80,
+    "useTabs": true,
+    "tabWidth": 1,
+    "singleQuote": true,
+    "overrides": [
+      {
+        "files": "**/*.md",
+        "options": {
+          "parser": "markdown",
+          "proseWrap": "always"
+        }
+      }
+    ]
+}

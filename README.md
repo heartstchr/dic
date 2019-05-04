@@ -12,7 +12,7 @@ command line dictionary
 > A simple CLI tool for ensuring that a given script runs continuously.
 
   ```sh
-  $ npm i -g lint-staged husky eslint prettier
+  npm i -g lint-staged husky eslint prettier
   ```
 
 > Clone the repo
