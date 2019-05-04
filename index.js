@@ -43,17 +43,24 @@ const run = async () => {
 		.description('Get Examples')
 		.action(word => getExamples(word));
 	
-		program
+	program
 		.command('getFullDict <word>')
 		.alias('fdict')
 		.description('Get Full Dict')
 		.action(word => getFullDict(word));
 
-		program
+	program
 		.command('getWordOfDay <word>')
 		.alias('wod')
 		.description('Get Word Of Day')
-		.action(word => getWordOfDay(word));
+		.action(word => getWordOfDay());
+
+	program
+		.command('getWordGame <word>')
+		.alias('play')
+		.description('Get Word Game')
+		.action(word => getWordGame());
+
 	program.parse(process.argv);
 };
 
