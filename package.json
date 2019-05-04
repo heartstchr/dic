@@ -6,7 +6,8 @@
   "scripts": {
     "lint:check": "eslint .",
     "lint:fix": "eslint --fix .",
-    "pretty:js": "prettier --parser flow --write"
+    "pretty:js": "prettier --parser flow --write",
+    "precommit": "lint-staged"
   },
   "repository": {
     "type": "git",
