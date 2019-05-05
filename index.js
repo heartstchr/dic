@@ -9,33 +9,7 @@ const CFonts = require('cfonts');
 
 const { getDefinations, getSynonyms, getAntonyms , getExamples, getFullDict, getWordOfDay, getWordGame} = require('./lib/index');
 const Common= require('./lib/helper/common')
-const style = {
-	font: 'block',
-	align: 'left',
-	colors: ['system'],
-	background: 'transparent',
-	letterSpacing: 1,
-	lineHeight: 1,
-	space: true,
-	maxLength: '0',
-};
-
-const questions = [
-	{
-	  type : 'input',
-	  name : 'word',
-	  message : 'Enter the word ...'
-	}
-  ];
-const secondQuestion = [
-	{
-	  type : 'rawlist',
-	  name : 'option',
-	  message : 'Answer is wrong. what do you want to do',
-	  choices:['Try again','Hint','Quit']
-	}
-];
-
+const Constant= require('./lib/helper/constant')
 clear();
 
 const run = async () => {
@@ -55,7 +29,7 @@ const run = async () => {
 		.description('Get definations')
 		.action(async (word) => {
 			let data = await getDefinations(word);
-			console.log(`${CFonts.say(word, style)} \n ${chalk.green(data.join('\n'))}`);
+			console.log(`${CFonts.say(word, Constant.style)} \n ${chalk.green(data.join('\n'))}`);
 		});
 
 	program
@@ -122,23 +96,22 @@ const run = async () => {
 run();
 
 const tryAgain=async (word)=>{
-	let answer = await prompt(questions)
+	let answer = await prompt(Constant.question)
 	let status = Common.checkWord(answer,word);
-	console.log(word);
 	if (status==true){
 		console.log(chalk.green('Yoo!! Word by you is correct'))
 	}else{
-		let answer = await prompt(secondQuestion);
-		if(answer.option==secondQuestion[0].choices[0]){
+		let answer = await prompt(Constant.secondQuestion);
+		if(answer.option==Constant.secondQuestion[0].choices[0]){
 			await tryAgain(word);
-		}else if(answer.option==secondQuestion[0].choices[1]){
+		}else if(answer.option==Constant.secondQuestion[0].choices[1]){
 			let hint = await displayHint(word);
 			console.log(chalk.yellow(`Try this Hint: ${chalk.bold.yellow(hint)}`))
 			await tryAgain(word);
-		}else if(answer.option==secondQuestion[0].choices[2]){
+		}else if(answer.option==Constant.secondQuestion[0].choices[2]){
 			let data = await getFullDict(word);
 			let result= Common.formatResult(data);
-			console.log(`${CFonts.say(word, style)} \n ${chalk.green(result.join('\n'))}`);
+			console.log(`${CFonts.say(word, Constant.style)} \n ${chalk.green(result.join('\n'))}`);
 		}
 	}
 }
