@@ -4,34 +4,34 @@ command line dictionary
 # Prerequisite
 > node --v
 
-        ```
-                v8.11.4
-        ```
+```sh
+        v8.11.4
+```
 # Installation
 
 > A simple CLI tool for ensuring that a given script runs continuously.
 
-  ```sh
-  npm i -g lint-staged husky eslint prettier
-  ```
+```sh
+npm i -g lint-staged husky eslint prettier
+```
 
 > Clone the repo
 
-        ```
-        git clone https://github.com/heartstchr/dic.git 
-        ```
+```sh
+git clone https://github.com/heartstchr/dic.git 
+```
 
 > Making index.js file executable 
 
-        ```
-        npm link
-        ```
+```sh
+npm link
+```
 
 > Install the dependency
 
-        ```
-        npm i
-        ```
+```sh
+npm i
+```
 
 > Command to get help
 
