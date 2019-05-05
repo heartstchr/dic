@@ -3,9 +3,19 @@ const chalk= require('chalk');
 const clear= require('clear');
 const figlet= require('figlet');
 const program= require('commander');
+const CFonts = require('cfonts');
 
 const { getDefinations, getSynonyms, getAntonyms , getExamples, getFullDict, getWordOfDay, getWordGame} = require('./lib/index');
-
+const style = {
+	font: 'block',
+	align: 'left',
+	colors: ['system'],
+	background: 'transparent',
+	letterSpacing: 1,
+	lineHeight: 1,
+	space: true,
+	maxLength: '0',
+};
 clear();
 
 const run = async () => {
@@ -25,7 +35,7 @@ const run = async () => {
 		.description('Get definations')
 		.action(async (word) => {
 			let data = await getDefinations(word);
-			console.log(chalk.green(data));
+			console.log(`${CFonts.say(word, style)} \n ${chalk.green(data.join('\n'))}`);
 		});
 
 	program
@@ -34,7 +44,7 @@ const run = async () => {
 		.description('Get synonyms')
 		.action(async (word) => {
 			let data = await getSynonyms(word);
-			console.log(chalk.green(data));
+			console.log(chalk.green(data.synonym.join(`\n`)));
 		});
 
 	program
@@ -43,7 +53,7 @@ const run = async () => {
 		.description('Get antonyms')
 		.action(async (word) => {
 			let data = await getAntonyms(word);
-			console.log(chalk.green(data));
+			console.log(chalk.green(data.antonym.join(`\n`)));
 		});
 
 	program
@@ -52,7 +62,7 @@ const run = async () => {
 		.description('Get Examples')
 		.action(async (word) => {
 			let data = await getExamples(word);
-			console.log(chalk.green(data));
+			console.log(chalk.green(data.join('\n')));
 		});
 	program
 		.command('getFullDict <word>')
@@ -60,7 +70,8 @@ const run = async () => {
 		.description('Get Full Dict')
 		.action(async (word) => {
 			let data = await getFullDict(word);
-			console.log(chalk.green(JSON.stringify(data)));
+			let result= formatResult(data);
+			console.log(chalk.green(result.join('\n')));
 		});
 
 	program
@@ -69,7 +80,8 @@ const run = async () => {
 		.description('Get Word Of Day')
 		.action(async () => {
 			let data = await getWordOfDay();
-			console.log(chalk.green(JSON.stringify(data)));
+			let result= formatResult(data);
+			console.log(chalk.green(result.join('\n')));
 		});
 
 	program
@@ -78,10 +90,19 @@ const run = async () => {
 		.description('Get Word Game')
 		.action(async () => {
 			let data = await getWordGame();
-			console.log(chalk.green(JSON.stringify(data)));
+			let result= formatResult(data);
+			console.log(chalk.green(result.join('\n')));
 		});
 
 	program.parse(process.argv);
 };
 
 run();
+
+const formatResult= (data)=>{
+	let result= [];
+	Object.keys(data).forEach((ele)=>{
+		result.push(data[ele]?`\n ${chalk.bold.yellow(ele)} \n \n ${ data[ele].join('\n')}`:``)
+	})
+	return result;
+}
