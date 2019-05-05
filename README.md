@@ -5,7 +5,7 @@ command line dictionary
 > node --v
 
 ```sh
-        v8.11.4
+v8.11.4
 ```
 # Installation
 
