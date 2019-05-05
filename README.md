@@ -56,4 +56,7 @@ command line dictionary
         getSynonyms|syn <word>     Get synonyms
         getAntonyms|ant <word>     Get antonyms
         getExamples|ex <word>      Get Examples
+        getFullDict|fdict <word>   Get Full Dict
+        getWordOfDay|wod           Get Word Of Day
+        getWordGame|play           Get Word Game
 ```
