@@ -1,4 +1,4 @@
-# Dic
+# Dictionary
 command line dictionary 
 
 # Prerequisit
