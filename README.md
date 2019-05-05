@@ -1,7 +1,7 @@
 # Dictionary
 command line dictionary 
 
-# Prerequisit
+# Prerequisite
 > node --v
 
         ```
