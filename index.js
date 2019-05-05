@@ -3,13 +3,13 @@ const chalk= require('chalk');
 const clear= require('clear');
 const figlet= require('figlet');
 const program= require('commander');
-const { prompt } = require('inquirer');
 const CFonts = require('cfonts');
 
 
 const { getDefinations, getSynonyms, getAntonyms , getExamples, getFullDict, getWordOfDay, getWordGame} = require('./lib/index');
 const Common= require('./lib/helper/common')
 const Constant= require('./lib/helper/constant')
+
 clear();
 
 const run = async () => {
@@ -87,32 +87,9 @@ const run = async () => {
 			let result= Common.formatResult(data.all);
 			console.log(chalk.green(result.join('\n')));
 			console.log('\n')
-			
-			await tryAgain(data.word)
+			await Common.tryAgain(data.word)
 		});
 	program.parse(process.argv);
 };
 
 run();
-
-const tryAgain=async (word)=>{
-	let answer = await prompt(Constant.question)
-	let status = Common.checkWord(answer,word);
-	if (status==true){
-		console.log(chalk.green('Yoo!! Word by you is correct'))
-	}else{
-		let answer = await prompt(Constant.secondQuestion);
-		if(answer.option==Constant.secondQuestion[0].choices[0]){
-			await tryAgain(word);
-		}else if(answer.option==Constant.secondQuestion[0].choices[1]){
-			let hint = await displayHint(word);
-			console.log(chalk.yellow(`Try this Hint: ${chalk.bold.yellow(hint)}`))
-			await tryAgain(word);
-		}else if(answer.option==Constant.secondQuestion[0].choices[2]){
-			let data = await getFullDict(word);
-			let result= Common.formatResult(data);
-			console.log(`${CFonts.say(word, Constant.style)} \n ${chalk.green(result.join('\n'))}`);
-		}
-	}
-}
-
