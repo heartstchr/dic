@@ -3,9 +3,12 @@ const chalk= require('chalk');
 const clear= require('clear');
 const figlet= require('figlet');
 const program= require('commander');
+const { prompt } = require('inquirer');
 const CFonts = require('cfonts');
 
+
 const { getDefinations, getSynonyms, getAntonyms , getExamples, getFullDict, getWordOfDay, getWordGame} = require('./lib/index');
+const Common= require('./lib/helper/common')
 const style = {
 	font: 'block',
 	align: 'left',
@@ -16,6 +19,23 @@ const style = {
 	space: true,
 	maxLength: '0',
 };
+
+const questions = [
+	{
+	  type : 'input',
+	  name : 'word',
+	  message : 'Enter the word ...'
+	}
+  ];
+const secondQuestion = [
+	{
+	  type : 'rawlist',
+	  name : 'option',
+	  message : 'Answer is wrong. what do you want to do',
+	  choices:['Try again','Hint','Quit']
+	}
+];
+
 clear();
 
 const run = async () => {
@@ -70,7 +90,7 @@ const run = async () => {
 		.description('Get Full Dict')
 		.action(async (word) => {
 			let data = await getFullDict(word);
-			let result= formatResult(data);
+			let result= Common.formatResult(data);
 			console.log(chalk.green(result.join('\n')));
 		});
 
@@ -80,7 +100,7 @@ const run = async () => {
 		.description('Get Word Of Day')
 		.action(async () => {
 			let data = await getWordOfDay();
-			let result= formatResult(data);
+			let result= Common.formatResult(data);
 			console.log(chalk.green(result.join('\n')));
 		});
 
@@ -90,19 +110,36 @@ const run = async () => {
 		.description('Get Word Game')
 		.action(async () => {
 			let data = await getWordGame();
-			let result= formatResult(data);
+			let result= Common.formatResult(data.all);
 			console.log(chalk.green(result.join('\n')));
+			console.log('\n')
+			
+			await tryAgain(data.word)
 		});
-
 	program.parse(process.argv);
 };
 
 run();
 
-const formatResult= (data)=>{
-	let result= [];
-	Object.keys(data).forEach((ele)=>{
-		result.push(data[ele]?`\n ${chalk.bold.yellow(ele)} \n \n ${ data[ele].join('\n')}`:``)
-	})
-	return result;
+const tryAgain=async (word)=>{
+	let answer = await prompt(questions)
+	let status = Common.checkWord(answer,word);
+	console.log(word);
+	if (status==true){
+		console.log(chalk.green('Yoo!! Word by you is correct'))
+	}else{
+		let answer = await prompt(secondQuestion);
+		if(answer.option==secondQuestion[0].choices[0]){
+			await tryAgain(word);
+		}else if(answer.option==secondQuestion[0].choices[1]){
+			let hint = await displayHint(word);
+			console.log(chalk.yellow(`Try this Hint: ${chalk.bold.yellow(hint)}`))
+			await tryAgain(word);
+		}else if(answer.option==secondQuestion[0].choices[2]){
+			let data = await getFullDict(word);
+			let result= Common.formatResult(data);
+			console.log(`${CFonts.say(word, style)} \n ${chalk.green(result.join('\n'))}`);
+		}
+	}
 }
+
